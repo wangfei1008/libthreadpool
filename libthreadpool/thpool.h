@@ -1,0 +1,41 @@
+﻿#ifndef C_LANGUAGE_TEMP_THREADPOOL_20120612_WANGFEI_H
+#define C_LANGUAGE_TEMP_THREADPOOL_20120612_WANGFEI_H
+
+typedef void* pthparm;
+typedef void* pthpool;
+
+typedef void (*procfun)(pthparm);
+
+
+// ///////////////////////////////////////////////////////////////////////////
+/// @Introduce 
+///           初始化线程池，根据线程池的最大数、最小数初始化
+/// @Param minnum--最小线程池线程数
+/// @Param maxnum--最大线程池线程数
+///
+/// @Retunrs 
+//          线程池值
+// ///////////////////////////////////////////////////////////////////////////
+pthpool thp_init(unsigned int minnum, unsigned int maxnum);
+
+// ///////////////////////////////////////////////////////////////////////////
+/// @Introduce 
+///          关闭线程池，关闭工作线程，管理线程、任务分配线程
+/// @Param pthp--线程池值
+// ///////////////////////////////////////////////////////////////////////////
+void thp_close(pthpool pthpl);
+
+// ///////////////////////////////////////////////////////////////////////////
+/// @Introduce 
+///           添加处理的任务
+/// @Param pthp--线程池值
+/// @Param callback--处理函数的回调
+/// @Param epollhandle--epoll句柄
+/// @Param parm--回调的参数
+///
+/// @Retunrs 
+//          正常
+// ///////////////////////////////////////////////////////////////////////////
+int thp_processtask(pthpool pthp, procfun callback, pthparm parm);
+
+#endif
